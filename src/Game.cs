@@ -37,7 +37,7 @@ namespace SudokuGame
             Console.Clear();
 
                              
-            while (conteo < 46)
+            while (conteo < 81)
             {
                 ScordX = "";
                 ScordY = "";
@@ -45,7 +45,7 @@ namespace SudokuGame
 
                 conteo = tabla.Construction(9, 9, num, cordX, cordY, numeros, conteo, CondRepetido, out puntos);
 
-                if (conteo > 45)
+                if (conteo > 80)
                 {
                     terminoJuego = false;
                     break;
