@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,7 +65,7 @@ namespace SudokuGame
                         switch (Fila)
                         {
                             case 0:
-                                entra.Rellenar(50);
+                                entra.Rellenar(45);
                                 break;
 
                             case 1:
