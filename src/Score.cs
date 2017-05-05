@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,13 +12,14 @@ namespace SudokuGame
     {
         //string RutaArchivo = "D:/Respaldo de proyectos Visual studio/SudokuGame/Records.txt";
         string RutaArchivo;
+        DirectoryInfo dir = new DirectoryInfo(Directory.GetCurrentDirectory());
         public void RevisaPuntuacion()
         {
-            DirectoryInfo dir = new DirectoryInfo(Directory.GetCurrentDirectory());
             RutaArchivo = dir + "/Records.txt";
             string texto;
             string nombre, puntos, fecha;
             string [] dato;
+            Console.WriteLine("Reglas del juego:\nPor cada numero insertado correctamente en la tabla en un punto extra.\nSi hay un error por numero repetitivo se resta un punto.\n\nPuntuaje:\n");
             if (!File.Exists(RutaArchivo))
             {
                 Console.WriteLine("No hay puntaje");
@@ -48,6 +49,7 @@ namespace SudokuGame
 
         public void CreaPuntos(string nombre, int puntos, string fecha)
         {
+            RutaArchivo = dir + "/Records.txt";
             if (!File.Exists(RutaArchivo))
             {   
                 StreamWriter archivo = new StreamWriter(RutaArchivo);
