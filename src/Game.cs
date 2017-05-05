@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +18,7 @@ namespace SudokuGame
             int score = 0;
             bool terminoJuego = true; 
             conteo = continuacion;
-            string nombre;
+            string nombre = "";
             int cordX = 0;
             int cordY = 0;
             int num = 0;
@@ -27,18 +27,29 @@ namespace SudokuGame
             string Snum = "";
             int CondRepetido = 1;
             Tabla tabla = new Tabla();
-            Console.Write("Ingresar el nombre: ");
-            nombre = Console.ReadLine();
+            while(nombre == "")
+            {
+                Console.Write("Ingresar el nombre: ");
+                nombre = Console.ReadLine();
+                if (nombre == "")
+                    Console.WriteLine("Debe ingresar un nombre");
+            }
             Console.Clear();
 
-            
-            while (conteo < 81)
+                             
+            while (conteo < 46)
             {
                 ScordX = "";
                 ScordY = "";
                 Snum = "";
 
                 conteo = tabla.Construction(9, 9, num, cordX, cordY, numeros, conteo, CondRepetido, out puntos);
+
+                if (conteo > 45)
+                {
+                    terminoJuego = false;
+                    break;
+                }
 
                 while (ScordX == "")
                 {
@@ -62,6 +73,7 @@ namespace SudokuGame
                     Console.Write("Los caracteres ingresados son incorrectos");
                     Console.ReadLine();
                     CondRepetido = 1;
+                    //score--;
                     Console.Clear();
                     continue;
                 }
@@ -75,6 +87,7 @@ namespace SudokuGame
                 {
                     Console.WriteLine("Ha ingresado caracteres raros");
                     Console.ReadLine();
+                    //score--;
                     Console.Clear();
                     continue;
                 }
@@ -85,6 +98,7 @@ namespace SudokuGame
                 {
                     Console.ReadLine();
                     CondRepetido = 1;
+                    score--;
                     Console.Clear();
                     continue;
                 }
@@ -95,6 +109,7 @@ namespace SudokuGame
                     if (valida.ValidaRepetido(numeros, cordX, cordY, 9, 9, num) == true || valida.ValidaRegillas(cordX, cordY, num, numeros) == true)
                     {
                         CondRepetido = 1;
+                        score--;
                     }
                     else
                         CondRepetido = 0;
@@ -103,11 +118,17 @@ namespace SudokuGame
                     CondRepetido = 0;
 
                 //(Tamaño x,Tamaño y, Numero, CordX, CordY)
-                score += puntos;
+
+                //score += puntos;
+                
                 if (CondRepetido == 1)
                 {
                     Console.Write("No es posible ingresar el numero " + Snum + " en las coordenadas: X:" + cordX + " Y:" + cordY);
                     Console.ReadLine();
+                }
+                else
+                {
+                    score++;
                 }
                 Console.Clear();
             }
@@ -129,8 +150,9 @@ namespace SudokuGame
             Console.SetCursorPosition((Console.WindowWidth - final3.Length) / 2, Console.CursorTop);
             Console.WriteLine(final3);
             Console.ReadLine();
-            Menu backMenu = new Menu();
-            backMenu.CreaMenu();
+            Console.Clear();
+            ShowScore goScore = new ShowScore();
+            goScore.Mostrar(score);
         }
     }
 }
